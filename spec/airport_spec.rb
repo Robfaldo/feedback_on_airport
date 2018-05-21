@@ -12,6 +12,10 @@ describe Airport do
       subject
       expect(subject.capacity).to eq 30
     end
+    # The default capacity is hard-coded, which is fine for now
+    # Otherwise put DEFAULT_CAPACITY = 30 in your class
+    # and test it saying
+    # expect(Airport::DEFAULT_CAPACITY).to eq 30
 
     it 'should allow you change default capacity' do
       airport = described_class.new(20)
@@ -23,12 +27,16 @@ describe Airport do
     it 'responds to land with 1 argument' do
       expect(subject).to respond_to(:land).with(1).argument
     end
+    # responds with 1 argument is unnecessary
+    # seeing as other tests do that already
     it 'can instruct a plane to land' do
       expect { subject.land(:plane) }.not_to raise_error 
     end
+    # The next test takes care of this already.
     it 'alerts the user that their plane has been stored' do
       expect(subject.land(:plane)).to eq "Your plane has been successfully stored"
     end
+    # The next test takes care of this already.
     it 'can store the plane in the airport hangar' do
       subject.land(:plane)
       expect(subject.planes).to include(:plane)
@@ -63,6 +71,7 @@ describe Airport do
     it 'responds to take_off' do
       expect(subject).to respond_to(:take_off)
     end
+    # unnecessary seeing as other tests do this already
     it 'should be able to return a plane to the user' do 
       subject.land(:plane)
       expect(subject.take_off).to eq :plane
@@ -110,6 +119,7 @@ describe Airport do
       subject.land(plane)
       expect(subject.take_off(plane)).to eq plane
     end
+    # This is a super important and meaningful test! Good job!
 
     it 'tells the plane that it is flying after it takes off' do
       plane = double(:plane)
@@ -133,6 +143,7 @@ describe Airport do
       expect(subject.check_plane(:plane)).to eq true
     end
   end
+  # plane_in_hangar would be less confusing name for the method
 
   describe '#stormy?' do
     it 'should return true if random weather generator is 75 or above' do
@@ -146,12 +157,15 @@ describe Airport do
       expect(subject).not_to be_stormy
     end
   end
+  # Hahaha, this is a truly vacuous test! =D
+  # Your "return a number between 1-100" test should be enough. 
 
   describe '#weather_generator' do 
     it 'should return a number between 1-100' do
       expect(subject.weather_generator).to be_between(1, 100).inclusive
     end
   end
+  # nice one
 
   describe '#full?' do 
     it 'returns true if there are as many planes in hangar as the capacity' do

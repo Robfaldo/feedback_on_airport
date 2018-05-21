@@ -13,4 +13,6 @@ class Plane
   def take_flight
     @flying_status = true
   end
+
+  # is there no method to make the plane stop flying when it's landed?
 end
